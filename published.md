@@ -927,6 +927,8 @@ A quiet channel is a trusted channel. One substantive, well-timed notification b
 
 **The async harness silencing the human.** When a background task is running, the assistant's bias toward "do the work, report back" can cause it to queue your new prompts behind the running task. A new message from you is always an interrupt. If the message has a question, answer it now.
 
+**Waiting on a worker that already died.** A delegated agent that stops with "I'll continue when the build completes" has *ended its turn*. If the thing it was waiting on finishes without re-invoking it — or the agent dies mid-report — nothing resumes it and no error surfaces. The finished work sits orphaned on disk while the session that delegated it keeps "waiting for the worker to land," sometimes for hours. The discipline: when a delegated deliverable is pending well past its expected window with no notification, **poll the work state, not the worker** — look at the output files, their timestamps, the commit log in the target repository. If the work is done and the worker is gone, take over directly and finish it inline; don't re-delegate another relay hop. Two mitigations make the failure cheaper when it happens: have long-running workers commit early and often (work saved before a death survives it), and keep their final reports terse — a long closing summary is a known place for a worker to die with everything undelivered. And a closing rule for any delegated deliverable: it should land somewhere you can *see* — a URL, a rendered file, a screenshot in the reply. Work that exists only inside a repository you never open is indistinguishable from work that didn't happen.
+
 ---
 
 ## Chapter 8 — Multi-agent patterns: a second pair of eyes

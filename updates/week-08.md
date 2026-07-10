@@ -31,3 +31,13 @@ The fix is a standing default worth writing down: at the start of any build task
 Tool discipline applies to what you ask the assistant to build, not just what it reaches for in a session. Custom dashboards rot: the hand-maintained list behind them lags reality and they stop being opened. Ask what you would honestly open every day; adopt the maintained tool if one maps; build custom only when nothing adopted covers the need *and* the result derives its data live from an existing source of truth.
 
 All four mirrored into the tier-1 narration.
+
+## Addendum (Friday, same week)
+
+### Chapter 7 — Async: new failure mode "Waiting on a worker that already died"
+
+A delegated agent that stops with "I'll continue when the build completes" has *ended its turn* — if the thing it was waiting on finishes without re-invoking it, or the agent dies partway through its final report, nothing resumes it and no error surfaces. The finished work sits orphaned on disk while the delegating session waits, sometimes for hours, on a worker that will never land.
+
+The discipline: past the expected window with no word, **poll the work state, not the worker** — output files, timestamps, the commit log in the target repository. If the work is done and the worker is gone, take over and finish inline; don't send another messenger after the first one. Mitigations: long-running workers commit early and often (work saved before a death survives it), and keep final reports terse — a long closing summary is a known place for a worker to die with everything undelivered. Closing rule: every delegated deliverable lands somewhere you can *see* — a URL, a rendered file, a screenshot. Work that exists only inside a repository you never open is indistinguishable from work that didn't happen.
+
+Mirrored into the tier-1 narration.
