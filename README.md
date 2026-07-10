@@ -1,30 +1,65 @@
-# Mastering Claude Code — A Project-Agnostic Practitioner's Guide
+# Mastering Claude Code
 
-This guide is for intermediate users who have moved past first contact with Claude Code and want to build something more durable: a working environment that accumulates knowledge over time, enforces the rules that matter, runs work in the background, and does not make you re-explain yourself at the start of every session. The patterns apply regardless of domain — software, research, writing, consulting, operations, or anything else that produces compounding text-based work.
+A practical guide for the curious — friends-of-friends edition.
 
-## Reading order
+This is a guide for people who've heard the name Claude Code, maybe tried it once or twice, and want to get more out of it than the box gives you. No prior expertise assumed. The patterns apply regardless of domain — writing, research, consulting, software, ops, or anything else that produces compounding text-based work.
 
-Start with the Foreword for the three-paragraph meta-stance and a map of the guide. Then read Pillars 1–4 plus Pillar 9 in any order — these five are the foundational layers, each independent enough to implement before the others are in place. Pillars 5–8 describe how to compose the building blocks into workflows; read these after you have a feel for the foundations. The Synthesis chapter (`10-synthesis.md`) walks a single practitioner through all nine pillars as one integrated system — read it first if you want the tour before the detail, or last if you prefer to build as you go.
+## Read it on the web
 
-## Contents
+The rendered guide, with narrated audio, lives at **https://claude-guide.sauer.com.au** — a landing page plus one page per tier.
 
-| # | Chapter | What it covers |
-|---|---------|----------------|
-| — | [Foreword](00-foreword.md) | What the guide is, who it is for, and the three claims that run through it |
-| 1 | [Memory](pillars/01-memory.md) | Four-type persistent knowledge store — how to make each session start at the level of a collaborator who was there from the beginning |
-| 2 | [Skills](pillars/02-skills.md) | Named, reusable slash-command procedures — converting "something I explained once" into "something we repeat reliably" |
-| 3 | [Subagents](pillars/03-subagents.md) | Briefed-cold specialist workers — parallel execution, context isolation, and the brief template that makes delegation work |
-| 4 | [Hooks & Guardrails](pillars/04-hooks.md) | Deterministic lifecycle enforcement — rules that run as shell commands and cannot be misread, forgotten, or overridden |
-| 5 | [The Persistence Ladder](pillars/05-persistence.md) | State at four scopes — matching todos, plans, memory, and worktrees to the lifetime of the work they carry |
-| 6 | [Async & Notifications](pillars/06-async.md) | Operating away from the terminal — outbound push, inbound inbox, background runs, and pacing that respects the cache window |
-| 7 | [Multi-agent Patterns](pillars/07-multi-agent.md) | Independent perspective through critic loops, planner/executor splits, and second-opinion calls on high-stakes decisions |
-| 8 | [Tool Discipline](pillars/08-tool-discipline.md) | Precise, fast execution — dedicated tools over shell equivalents, parallel batching, and routing large outputs through subagents |
-| 9 | [CLAUDE.md & Standing Instructions](pillars/09-claude-md.md) | The always-on, manually authored project- and user-scope instructions file — the interpretive frame the assistant arrives knowing |
-| 10 | [Synthesis](10-synthesis.md) | All nine pillars as one system, walked through a concrete practitioner's setup from week one to year one |
+## Three reading paths
 
-## Conventions used in this guide
+The same material, three depths. Read in order, or skip straight to the one that matches your appetite.
 
-The guide is project-agnostic by design: no assumption that your work is software, no single domain treated as the default. Each pillar chapter uses a worked example from outside software to anchor the principle — academic research, long-form non-fiction writing, consulting report work, legal review, home renovation, indie game development, event planning, archival history, and a small bookkeeping practice. The Synthesis chapter uses a different domain again (one-person IT consultancy) as its concrete through-line. When you read the examples, map the roles and artefacts to your own work: the pattern is always more portable than the example that carries it.
+| Tier | File | Who it's for | Length |
+|------|------|--------------|--------|
+| **0** | [`tier-0.md`](tier-0.md) — *What Claude Code Actually Is* | Anyone who thinks "Claude Code = for programmers" and would otherwise never try it. No tools, no install, no jargon. Capability tour with non-software vignettes. | ~1,900 words, 8 min |
+| **0.5** | [`tier-0.5.md`](tier-0.5.md) — *The Nine Things Worth Building, In Plain English* | Tier 0 readers who got curious. Each pillar as a household analogy (standing letter, locked cabinet, recipe drawer…) plus a "what to build first" adoption order. | ~1,900 words, 8 min |
+| **1** | [`published.md`](published.md) / [`narration.md`](narration.md) — *Mastering Claude Code* | People ready to actually set it up. Full nine-pillar treatment with tables, code, file paths, walked example. | ~12,000 words, 50 min |
+
+Tier 0 + 0.5 are the shareables. Tier 1 is what you hand someone after they've decided to do the work.
+
+## The nine pillars
+
+The guide is organised around nine things worth building, in dependency order:
+
+1. **CLAUDE.md** — a standing letter to your assistant: the context and behavioural defaults it arrives knowing.
+2. **Memory** — a store of small indexed files, so each session starts at the level of a collaborator who was there from the beginning.
+3. **Skills** — named, reusable procedures: "something I explained once" becomes "something we repeat reliably".
+4. **Hooks & guardrails** — rules enforced by the harness itself; the ones the model cannot skim, forget, or rationalise past.
+5. **Subagents** — briefed-cold specialist workers for parallel or heavy work, keeping the main context clean.
+6. **The persistence ladder** — todos, plans, memory, worktrees: state kept at the scope that matches its lifetime.
+7. **Async & notifications** — work that runs while you're away, with outbound push, an inbound inbox, and self-healing background runs.
+8. **Multi-agent patterns** — critic loops, second opinions, and deterministic workflows for decisions that are expensive to get wrong.
+9. **Tool discipline** — the cheapest tool that does the job, batched, with large outputs routed through subagents.
+
+## Tier 1 structure
+
+Tier 1 ships as two files with identical content reshaped for the medium:
+
+- **`published.md`** — written version. Tables, ASCII diagrams, code samples, and an annex prompt at the end for spinning up a fresh AI session that already knows the guide.
+- **`narration.md`** — audio version. Prose flow, no tables, no code blocks. This is the text behind the narrated audio on the web version.
+
+Both follow the same nine-pillar structure:
+
+| Part | Chapters | What you'll get |
+|------|----------|------------------|
+| 1. Getting Started | 0 | What Claude Code is, vocabulary, first session |
+| 2. Foundations | 1. CLAUDE.md · 2. Memory · 3. Skills · 4. Hooks · 5. Subagents | Five building blocks of a real setup |
+| 3. Composition | 6. Persistence ladder · 7. Async · 8. Multi-agent · 9. Tool discipline | Combining the building blocks into workflows |
+| 4. Putting It Together | — | A walked example (Alex's consultancy), adoption order, caveats |
+
+The chapters in Part 2 are independent — read them in any order.
+
+## Weekly updates
+
+The guide is a living document, updated as real sessions teach new lessons. Each round of changes is logged in:
+
+- [`updates/index.md`](updates/index.md) — rolling index of the last ten weeks, newest first.
+- `updates/week-NN.md` — one file per week with the actual changes.
+
+If you read this in week 3 and revisit in week 7, open `updates/index.md` and scan the rows between those weeks. Older entries (beyond ten weeks) roll off into a single-line summary at the bottom of the index. [`CHANGELOG.md`](CHANGELOG.md) holds the full lesson-by-lesson history.
 
 ## License
 
