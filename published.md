@@ -181,6 +181,7 @@ A handful that have proven worth setting:
 | **Stay in lane** | Do the thing asked. A side-observation is not a new task — acknowledge it in a sentence; don't start building it. |
 | **Search before asking** | Before asking for something, look for it first — in memory, in the files, in the place it would already be. Don't make me re-supply what's on disk. |
 | **Calibrate confidence** | Label what you haven't verified. Flag the risk up front. Don't fold the moment I push back if you're right. |
+| **Lead with the answer** | When I ask a direct question — yes/no, who owes whom, how much — put the answer in the first sentence, then the supporting breakdown. A correct table I still have to read the answer out of hasn't answered the question. |
 | **Evidence before "done"** | Don't report a thing fixed until you've checked the symptom is actually gone — and say what you checked. |
 | **Discussion mode vs execution mode** | When the conversation has been evaluating an approach, an imperative like "run the migration" may mean "test this" — not "hit live now". Read prior context; if ambiguous, one short confirm before a write that cannot be easily undone. |
 | **Session rules stay binding** | A method instruction or classification stated early in a session is a session-scoped rule, not a one-time answer. Don't drift back to default heuristics as the session lengthens — scan prior turns before applying defaults to any new instance of the same pattern. |
@@ -558,6 +559,8 @@ Pair them with a sanctioned reader — a small script that prints any file with 
 
 **Shared hook state that leaks across sessions.** The moment a hook writes a file — say, a flag that unlocks a guard for one operation — that file is shared by every session running at once. Give it a fixed name and two sessions collide: a one-shot unlock you granted in one terminal satisfies a guard in another, or a flag left by a since-dead session blocks a live one. Put the session's ID in the filename, so a bypass stays where you granted it.
 
+**A guard that fires once, then goes silent for the rest of the session.** A detection hook that blocks the *first* offence and then stays quiet feels tidy — it isn't nagging. But the offence it catches is rarely a one-off: a session that claims something done without proof once tends to do it repeatedly as it lengthens, and those later claims are the ones that slip through unseen precisely because the guard already "did its job." Reading such a guard's own log back over several long sessions shows the pattern plainly — one early block followed by a cascade it never stopped. The fix is a per-session counter in the state file: re-arm on the first offence and every Nth after it (first, fifth, tenth), so the guard keeps its bite through exactly the long sessions where discipline slips most. A hook that can only interrupt once is a hook that stops working the moment it's needed twice.
+
 ### Finding which hooks are worth building
 
 The hooks above are examples. The ones *you* need are hiding in your own history — in the moments you had to correct the same thing twice.
@@ -566,7 +569,7 @@ The transcripts of your past sessions are on disk. Read back over a month of the
 
 Two of the most valuable hooks come straight out of that exercise, and neither is a path-blocker:
 
-- **A `Stop` guard that refuses an unproven claim.** It reads the assistant's final message; if it asserts *done / fixed / deployed / working* but the same message shows no evidence — no command output, no status code, no commit hash, no figure — it blocks once and asks for proof or an honest "I couldn't verify this." "It works" stops being something the assistant can say for free.
+- **A `Stop` guard that refuses an unproven claim.** It reads the assistant's final message; if it asserts *done / fixed / deployed / working* but the same message shows no evidence — no command output, no status code, no commit hash, no figure — it blocks and asks for proof or an honest "I couldn't verify this." "It works" stops being something the assistant can say for free. (See the re-arming note in the failure modes below — a guard like this must *not* fire only once per session.)
 - **A `UserPromptSubmit` injector that fires only on heat.** Most of the time it stays silent. But when your message reads as a terse imperative or a correction — *just do it, I already told you, stop asking* — it prepends your hardest-won rules to that turn. The discipline arrives exactly where the record shows it tends to slip, and costs nothing on the calm turns.
 
 Why hooks and not more CLAUDE.md prose? Because a rule the model reads is a rule it can rationalise past under pressure; a rule the harness enforces is one it cannot. If you find yourself adding the same line to your standing instructions for the third time, that's not a documentation gap — it's a hook waiting to be written.
