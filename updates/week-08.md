@@ -41,3 +41,15 @@ A delegated agent that stops with "I'll continue when the build completes" has *
 The discipline: past the expected window with no word, **poll the work state, not the worker** — output files, timestamps, the commit log in the target repository. If the work is done and the worker is gone, take over and finish inline; don't send another messenger after the first one. Mitigations: long-running workers commit early and often (work saved before a death survives it), and keep final reports terse — a long closing summary is a known place for a worker to die with everything undelivered. Closing rule: every delegated deliverable lands somewhere you can *see* — a URL, a rendered file, a screenshot. Work that exists only inside a repository you never open is indistinguishable from work that didn't happen.
 
 Mirrored into the tier-1 narration.
+
+## Addendum 2 (Sunday, same week)
+
+### Chapter 4 — Hooks: new failure mode "A guard that fires once, then goes silent"
+
+The Chapter 4 section on finding your own hooks already recommends a `Stop` guard that refuses an unproven "done" claim. This addendum corrects a subtle way that guard fails in practice: if it blocks only the *first* offence per session and then stays quiet, it stops protecting you exactly when you most need it. The offence it catches is rarely a one-off — a session that claims something finished without proof once tends to repeat it as it lengthens, and those later claims sail through unseen because the guard already "did its job." Read the guard's own log back across several long sessions and the shape is unmistakable: one early block, then a cascade it never stopped. The fix is a per-session counter in the state file — re-arm on the first offence and every Nth after it (first, fifth, tenth) — so the guard keeps its bite through the long sessions where discipline slips the most. A hook that can only interrupt once is a hook that stops working the moment it's needed twice. The existing "unproven claim" bullet now carries a forward-reference to this mode.
+
+### Chapter 1 — CLAUDE.md: new behavioural default "Lead with the answer"
+
+For a direct question — yes/no, who owes whom, how much — the answer belongs in the first sentence, with the supporting breakdown after it. A correct table the reader still has to extract the headline from hasn't answered the question at a glance. Added as a Ch 1 defaults-table row.
+
+Both mirrored into the tier-1 narration.
