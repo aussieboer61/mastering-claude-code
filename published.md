@@ -189,6 +189,8 @@ A handful that have proven worth setting:
 | **Sanity-check results against known context** | Before reporting a measurement as a finding, check it against what's already known — geography, host state, time of day. An implausible number (LAN-grade latency to a server on another continent) is a signal to investigate, not a result to report. |
 | **Ask why the primary path is out — first** | When work is running on a fallback — a backup link, a secondary tool, a workaround config — establish *why* the designed path isn't in use before engineering around the fallback. The reason usually changes the whole answer; one question up front beats a scaffold built around the symptom. |
 | **The target is the deliverable** | When work is built *for* a specific device or surface, "done" means working there. A stand-in — "it runs in the browser", "here's the same thing as a web page" — is at most a temporary aid while the real target is being fixed, never the delivered answer unless the user explicitly accepts the downgrade. |
+| **Finish the slice** | When the plan is agreed and work remains, work through to done — don't end each increment with "want me to continue?". And a standard follow-on step the assistant already holds the keys for — the DNS record, the certificate, the service registration — is part of the work, not an optional extra to offer back. Ship the whole vertical slice, not the eighty percent that leaves the user wiring the last mile. |
+| **The question outranks the instruction** | When one message carries both an instruction and a question, answer the question first — it's the part blocking the user's next thought. Start the instruction as background work and report when it lands; don't serialise the human behind the delegated task. |
 
 Two notes. These are *defaults*, not iron rules — the assistant can depart from them with reason; they set the resting behaviour. And the discipline from the next chapter applies here too: keep the set small, and phrase each as what *to* do. A pile of "never do X" defaults produces an assistant that asks permission to breathe. If your standing instructions have drifted to "ask before everything", that drift is the bug, not the safety net.
 
@@ -798,6 +800,8 @@ The default walk for any new piece of work:
 
 **A worktree for a trivial edit.** The overhead of a second branch is only justified when isolation is genuinely needed.
 
+**Two retention windows, and the shorter one runs upstream.** An archive job that sweeps everything older than ninety days sits downstream of a tool whose built-in cleanup deletes the same material at thirty. Every item is purged two months before the sweeper would have collected it — the archive stays nearly empty indefinitely, and nothing errors, because deletion is a default and defaults don't announce themselves. When you build anything archival, enumerate every cleanup already acting on the source — the harness's own retention setting first — and make the upstream window longer than the downstream sweep, or disable it. The audit is one check: if the oldest surviving item is exactly as old as some tool's default retention period, that tool is winning.
+
 ### A homeowner's renovation
 
 Month one: a homeowner uses `TodoWrite` to track each day's site work — confirm skip-bin delivery, photograph existing walls, call the certifier. The lists do their job and are gone by evening.
@@ -999,6 +1003,8 @@ The pattern earns its cost because the five sub-tasks are genuinely independent,
 **Parallel fan-out for dependent tasks.** Running B in parallel with A when B needs A's output produces error-embedded results that look complete and aren't.
 
 **Sibling collisions in flat fan-out.** N parallel agents picking the same obvious example domain independently. The fix is a manager agent that assigns distinct scope before workers begin.
+
+**Parallel sessions colliding in another failure's clothes.** Two sessions working the same codebase on one machine rarely fail with "another session interfered" — they fail as something else. A test suite dies mid-run with an out-of-memory-looking kill signal; the real cause is the sibling's test run tearing down the shared containers under it. A coordination registry is unreachable and fails *open*, so each session believes it holds the lane alone. A merge completes without a single conflict while silently dropping one branch's additions, because the other side rewrote the same files wholesale and auto-resolution took the rewrite. The disciplines: give each concurrent run its own namespace — test project names, ports, and a working copy each (a worktree per session, never a shared checkout); treat an unexplained kill signal as "check for a sibling" before debugging the code; and after any merge where the other side heavily refactored shared files, search the merged tree for your branch's key symbols before trusting it — a conflict-free merge is not a content-preserving merge.
 
 **Critic monoculture.** Five critics all briefed with the same axis — all adversarial, all security-focused, all compliance-oriented — will collectively miss every failure outside that axis. At minimum, one critic should occupy the "use this as an actual operator would" angle — treating the work as a product to be used, not a specification to be verified.
 
