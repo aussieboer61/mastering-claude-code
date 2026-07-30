@@ -67,8 +67,8 @@ Found something wrong, or a pattern that earned its keep in your own setup? [Ope
 
 ## License
 
-Mastering Claude Code — A Practitioner's Guide. Copyright © 2026 aussieboer61.
+Mastering Claude Code — A Practitioner's Guide. Copyright © 2026 Richard Sauer.
 
 Licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). Share it, adapt it, build on it — including commercially — as long as you give credit. See [`LICENSE`](LICENSE) for the full legal text.
 
-Suggested attribution: *"Mastering Claude Code — A Practitioner's Guide" by aussieboer61, licensed under CC BY 4.0 — https://github.com/aussieboer61/mastering-claude-code*
+Suggested attribution: *"Mastering Claude Code — A Practitioner's Guide" by Richard Sauer, licensed under CC BY 4.0 — https://github.com/aussieboer61/mastering-claude-code*
