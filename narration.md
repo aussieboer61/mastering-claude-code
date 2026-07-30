@@ -84,6 +84,8 @@ One more thing earns a place in this file, and it's easy to miss because it isn'
 
 ---
 
+One more default, and it is a small one that prevents a large embarrassment. One sample is not the set. Before you characterise a group — they all have this, none of these need that — check more than one of them. It is remarkably easy to look at a single item, find it in good order, and report confidently on all seventeen. And the danger is not the wrong sentence. It is that the wrong sentence then gets used to justify an action, and the action is sized for a situation that does not exist.
+
 ## Chapter two — Memory, knowledge that survives the session
 
 Memory is a folder of small text files that Claude reads at the start of each session. Unlike CLAUDE-dot-em-dee, which loads in full every time, memory is indexed. Claude reads the index first, then opens only the files relevant to today's task. It's the difference between leaving a one-page letter on the desk and giving the assistant access to a filing cabinet with labelled drawers.
@@ -141,6 +143,10 @@ The failures to watch for: vague descriptions that never trigger; skills that wr
 If you're trying to decide between a skill, a hook, and a subagent — chapters four and five — here's the rule. A hook fires automatically on a system event, like a session start or a file write. A skill is invoked on demand by the user, or pro-actively by Claude based on the description. A subagent is for work that's long, parallel, or needs a specialist with its own tool kit. We'll come to hooks and subagents next.
 
 ---
+
+There is one more way skills go wrong, and it is the one that cost me the most. A skill is rarely just a procedure. It is usually also a set of claims about the world — which service sits behind this, what the default setting is, how long the operation takes, which options are valid. Procedures age slowly. Claims age fast. So when the thing underneath gets swapped out, the skill carries on confidently describing the old one. And here is the sting: because a skill reads as authoritative and purpose-built, it gets trusted over the general project instructions — which, being closer to the person actually doing the work, are usually the ones that got updated. That inversion is the whole failure. Every estimate comes out wrong in the same direction, delivered with the file's borrowed confidence, while the correction sits unread in the project file.
+
+A stale skill can also be wrong by omission. If its list of available operations predates a feature, a reader concludes the feature does not exist, and builds an elaborate workaround for a problem that was already solved. Two habits contain all of this. Put a verification date on any factual claim inside the skill, so a reader can see the claim is two months old rather than assuming it is current. And treat a disagreement between a skill and the project instruction file as evidence that the skill is the one that is behind — then go and check the live system before quoting either of them.
 
 ## Chapter four — Hooks, rules your assistant cannot skip
 
@@ -238,6 +244,10 @@ Here's a homeowner's renovation. Month one: she uses Claude's in-session todos t
 
 ---
 
+One failure in this chapter is worth naming on its own, because it hides so well. Written instructions describe intent, and intent is not implementation. A line saying that something is copied to the backup machine every ten minutes can be entirely aspirational — written when the plan was made, and never followed by the job that would actually do it. This is hard to catch precisely because it looks so plausible. The equivalent jobs for the other destinations all exist. The file states the cadence confidently. The destination even has some content, because at some point somebody copied it across by hand. Nothing errors. There is no failed run to notice, because there are no runs at all. The gap only surfaces when you go looking for one specific recent change and find the copy months behind.
+
+So treat any stated automation as a claim to verify rather than a fact to rely on. List the scheduled jobs, confirm one actually exists for that path, and check that the destination's newest content really does track the source. And when you do find one missing, the useful question is not just how to add it. It is what else in that file was written as intent and never built.
+
 ## Chapter seven — Async, work that runs while you sleep
 
 You're not always at the keyboard. A mature setup builds that assumption in rather than hoping you'll be there. The async layer has three pieces. Outbound notifications, where something pings you when a task completes. An inbound inbox, where you can drop a message in from your phone that the next session picks up. And background runs, where long jobs don't block your main session.
@@ -316,9 +326,17 @@ Before that, one failure that belongs squarely in this chapter, because it is pu
 
 One more discipline belongs in this chapter, and it's about what you ask the assistant to *build*, not just what it reaches for in a session. An assistant this capable will cheerfully build you a custom dashboard for anything — and the dashboard is great for the week after it ships. Then something moves, the hand-maintained list behind it lags reality, and it quietly stops being opened. The failure isn't the technology; it's that it's bespoke at all. Before commissioning a status surface or an operations tool, ask what you would honestly open every day — and if the answer maps to an existing, actively-maintained tool, adopt that instead. Build custom only when nothing adopted covers the need, and the result can derive its data live from a source of truth that already exists, rather than from a list someone has to keep updating.
 
+Two more disciplines belong here, and both are about evidence. The first: do not trust a status field over the artifact. Systems that do slow work usually expose some kind of progress field — a state, a percentage, a "ready". It is tempting to treat that as the answer to "is it finished", because it is designed to look like exactly that. But a status field is a claim the system makes about itself, and it can be wrong in every direction at once. Reporting nothing queued, while a job sits in the queue. Reporting a failure, while the job is healthy and waiting its turn. Holding a stale error long after a successful retry. Reporting complete before the output exists. Each of those produces a different bad decision — abandoning a job that was fine, retrying one that was already running, or declaring success before there is anything to hand over. So make it a rule about evidence. Decide completion on the artifact, not the status. Does the output have a real size, a real duration? Does fetching it actually return bytes? Those cannot be wrong in the way a cached field can. Keep the status field for what it is genuinely good at — a rough progress indicator for a human who is watching — and never branch on it.
+
+The second: absence from the documentation is not absence from the system. When you need a capability and the reference does not list it, the honest conclusion is that it is not documented — not that it is not supported. That difference matters enormously, because the workaround for a genuinely missing capability is usually expensive and invasive. Mutating a large number of objects. Rebuilding by hand something the system already does for you. And documentation lags implementation as a matter of course — a feature shipped last week is real in the code and absent from every guide. So before you commit to a workaround with a large blast radius, spend two minutes reading the actual interface: the source, the schema, the generated description of the API. The rule scales with the cost of being wrong. The more things your workaround would touch, the more obliged you are to prove the direct route does not exist. And if you ever find yourself planning to modify dozens of things to achieve what one parameter would do — that is the signal to stop and go and look.
+
 The short rule of thumb: use the most specific tool that does the job. Batch every independent call into the same turn. Route large outputs through a subagent and bring back only the derived result. Load deferred tool bundles once, not one tool at a time.
 
 ---
+
+One last failure for this chapter, and it is about the ground moving underneath you. Background work quietly assumes that the thing it depends on stays still. When a service is being redeployed while your job is running against it, the job dies — and the error you get depends entirely on which instant you happened to hit. Connection refused, before the new instance is listening. A name-resolution failure, while it is coming up. A plain rejection, while it is still loading its models. Three attempts, three different errors. And the natural reading of three different errors is three separate faults. So you chase each one in turn — the network, then memory, then the dependency's configuration — and every trail is plausible enough to burn an hour on.
+
+The tell is the pattern, not any single error. Repeated failures with different messages, from the same dependency, in a short window, usually mean one upstream event rather than several independent faults. So before you diagnose the third error, check whether the thing underneath changed. When did its process actually start? Does that timestamp land inside the window where your job was failing? A dependency whose start time is newer than your job is the entire answer — and it is a two-second check that saves you the hour.
 
 # Part four — Putting it together
 

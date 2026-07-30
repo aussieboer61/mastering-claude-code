@@ -36,4 +36,4 @@ When two or three of these light up, sit down with the memory store for an hour,
 
 ## Where to read
 
-The chapter-2 update lands in both formats. The written version is at the same library URL; the narrated version re-renders automatically (Kokoro picks up the patched `narration.md` on next regeneration).
+The chapter-2 update lands in both formats. The written version stays at the same URL; the narrated version re-renders automatically, picking up the patched `narration.md` on the next regeneration.

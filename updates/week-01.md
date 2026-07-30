@@ -32,7 +32,7 @@ The order now follows dependency: cheapest first, then knowledge, then procedure
 
 ### Two output formats
 - **`published.md`** — full markdown with tables, ASCII diagrams, code samples, and an annex prompt at the very end for spinning up a fresh AI session that already knows the guide. This is what gets rendered as HTML at the library URL.
-- **`narration.md`** — same content, reshaped for the ear. Tables converted to prose. Code blocks described in words. ASCII diagrams replaced with spoken descriptions. The annex is dropped (it's not useful when heard). This is the file the library's Kokoro TTS narrates, in the British male voice `bm_george`.
+- **`narration.md`** — same content, reshaped for the ear. Tables converted to prose. Code blocks described in words. ASCII diagrams replaced with spoken descriptions. The annex is dropped (it's not useful when heard). This is the file the text-to-speech pipeline narrates, in a British male voice.
 
 ### Weekly update model
 The guide is now a living document. Each week's changes go into `updates/week-NN.md`. A rolling index at `updates/index.md` lists the last ten weeks. The archive caps at ten weeks — older entries get summarised down to a single line and the full file rolls off. The point is that someone who reads the guide in week 3 and revisits in week 7 only needs to scan the index, then open the two or three week files that look load-bearing for them.
