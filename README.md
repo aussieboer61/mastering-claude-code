@@ -61,6 +61,14 @@ The guide is a living document, updated as real sessions teach new lessons. Each
 
 If you read this in week 3 and revisit in week 7, open `updates/index.md` and scan the rows between those weeks. Older entries (beyond ten weeks) roll off into a single-line summary at the bottom of the index. [`CHANGELOG.md`](CHANGELOG.md) holds the full lesson-by-lesson history.
 
+## Feedback
+
+Found something wrong, or a pattern that earned its keep in your own setup? [Open an issue](https://github.com/aussieboer61/mastering-claude-code/issues) — the guide is revised from real sessions, and corrections from other people's setups are the most useful kind.
+
 ## License
 
-This guide is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). Share it, adapt it, build on it — including commercially — as long as you give credit. See [`LICENSE`](LICENSE) for the full text.
+Mastering Claude Code — A Practitioner's Guide. Copyright © 2026 aussieboer61.
+
+Licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). Share it, adapt it, build on it — including commercially — as long as you give credit. See [`LICENSE`](LICENSE) for the full legal text.
+
+Suggested attribution: *"Mastering Claude Code — A Practitioner's Guide" by aussieboer61, licensed under CC BY 4.0 — https://github.com/aussieboer61/mastering-claude-code*
