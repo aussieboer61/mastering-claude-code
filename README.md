@@ -8,6 +8,8 @@ This is a guide for people who've heard the name Claude Code, maybe tried it onc
 
 The rendered guide, with narrated audio, lives at **https://claude-guide.sauer.com.au** — a landing page plus one page per tier.
 
+**Eesti keeles / Estonian:** a machine-translated, narrated edition is at **https://claude-guide.sauer.com.au/ee/** (source in [`et/`](et/) — English is authoritative; corrections welcome).
+
 ## Three reading paths
 
 The same material, three depths. Read in order, or skip straight to the one that matches your appetite.

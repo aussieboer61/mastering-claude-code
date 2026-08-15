@@ -1,0 +1,104 @@
+{
+ "tier-0": [
+  {
+   "file": "tier-0.mp3",
+   "title": "Mis Claude Code tegelikult on",
+   "seconds": 716.2,
+   "bytes": 5730472
+  }
+ ],
+ "tier-0.5": [
+  {
+   "file": "tier-0.5.mp3",
+   "title": "Üheksa asja, mida tasub ehitada, lihtsas keeles",
+   "seconds": 740.2,
+   "bytes": 5922315
+  }
+ ],
+ "tier-1": [
+  {
+   "file": "tier-1-00.mp3",
+   "title": "Praktiline teejuht uudishimulikele — kuulatav väljaanne",
+   "seconds": 58.5,
+   "bytes": 469202
+  },
+  {
+   "file": "tier-1-01.mp3",
+   "title": "Kuidas see teejuht on üles ehitatud",
+   "seconds": 87.6,
+   "bytes": 701796
+  },
+  {
+   "file": "tier-1-02.mp3",
+   "title": "Nullis peatükk — Mis Claude Code tegelikult on",
+   "seconds": 258.0,
+   "bytes": 2064970
+  },
+  {
+   "file": "tier-1-03.mp3",
+   "title": "Esimene peatükk — CLAUDE.md, seisev kiri sinu abilisele",
+   "seconds": 894.1,
+   "bytes": 7153414
+  },
+  {
+   "file": "tier-1-04.mp3",
+   "title": "Teine peatükk — Mälu, teadmine, mis elab seansi üle",
+   "seconds": 714.2,
+   "bytes": 5714380
+  },
+  {
+   "file": "tier-1-05.mp3",
+   "title": "Kolmas peatükk — Oskused ehk ühe käsuga protseduurid",
+   "seconds": 471.8,
+   "bytes": 3775259
+  },
+  {
+   "file": "tier-1-06.mp3",
+   "title": "Neljas peatükk — Haagid ehk reeglid, millest sinu abiline ei saa mööda hiilida",
+   "seconds": 797.9,
+   "bytes": 6383742
+  },
+  {
+   "file": "tier-1-07.mp3",
+   "title": "Viies peatükk — Alamagendid ehk anna raske töö käest ära",
+   "seconds": 626.3,
+   "bytes": 5010955
+  },
+  {
+   "file": "tier-1-08.mp3",
+   "title": "Kuues peatükk — Püsivuse redel ehk olek õiges ulatuses",
+   "seconds": 732.2,
+   "bytes": 5858576
+  },
+  {
+   "file": "tier-1-09.mp3",
+   "title": "Seitsmes peatükk — asünkroonsus, töö, mis käib sel ajal, kui sina magad",
+   "seconds": 589.7,
+   "bytes": 4718802
+  },
+  {
+   "file": "tier-1-10.mp3",
+   "title": "Kaheksas peatükk — mitme agendiga mustrid, teine silmapaar",
+   "seconds": 788.0,
+   "bytes": 6304539
+  },
+  {
+   "file": "tier-1-11.mp3",
+   "title": "Üheksas peatükk — tööriistadistsipliin ehk vali õige haamer",
+   "seconds": 1033.2,
+   "bytes": 8266021
+  },
+  {
+   "file": "tier-1-12.mp3",
+   "title": "Läbikäidud näide: Alex ja konsultatsioonifirma",
+   "seconds": 387.0,
+   "bytes": 3096493
+  },
+  {
+   "file": "tier-1-13.mp3",
+   "title": "Lõpetuseks",
+   "seconds": 96.4,
+   "bytes": 772013
+  }
+ ]
+}
